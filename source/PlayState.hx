@@ -219,7 +219,11 @@ class PlayState extends MusicBeatState
 
 	private var executeModchart = false;
 
-	// API stuff
+	// THINGIES
+	var thunderNoteHit:Bool = false;
+	var holdArray:Array<Bool> = [];
+	var pressArray:Array<Bool> = [];
+	var releaseArray:Array<Bool> = [];
 
 	public function addObject(object:FlxBasic)
 	{
@@ -993,6 +997,7 @@ class PlayState extends MusicBeatState
 
 			for (songNotes in section.sectionNotes)
 			{
+				var daNoteType = songNotes[3];
 				var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
 				if (daStrumTime < 0)
 					daStrumTime = 0;
@@ -1011,7 +1016,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, daNoteType);
 				swagNote.sustainLength = songNotes[2];
 				swagNote.scrollFactor.set(0, 0);
 
@@ -1851,8 +1856,19 @@ class PlayState extends MusicBeatState
 						daNote.kill();
 						notes.remove(daNote, true);
 					}
-					else
+					else if (daNote.noteType == 1 && daNote.wasGoodHit && !thunderNoteHit)
 					{
+						trace(daNote.noteType + ' executed');
+						thunderNoteHit = true;
+
+						health -= 0.025;
+						vocals.volume = 0;
+						if (theFunne)
+							noteMiss(daNote.noteData, daNote);
+					}
+					else	
+					{
+						trace(daNote.noteType);
 						health -= 0.075;
 						vocals.volume = 0;
 						if (theFunne)
@@ -2283,9 +2299,30 @@ class PlayState extends MusicBeatState
 	private function keyShit():Void // I've invested in emma stocks
 	{
 		// control arrays, order L D R U
-		var holdArray:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
-		var pressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-		var releaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+		if (thunderNoteHit)
+		{
+			holdArray = [false, false, false, false];
+			pressArray = [false, false, false, false];
+			releaseArray = [false, false, false, false];
+			new FlxTimer().start(5, function(tmr:FlxTimer)
+			{
+				thunderNoteHit = false;
+
+				if (!FlxG.save.data.botplay)
+				{
+					holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+					pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+					releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+				}
+			});
+		}
+		else
+		{
+			holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+			pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+			releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+		}
+		
 		#if windows
 		if (luaModchart != null)
 		{
