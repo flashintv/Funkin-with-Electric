@@ -1856,19 +1856,8 @@ class PlayState extends MusicBeatState
 						daNote.kill();
 						notes.remove(daNote, true);
 					}
-					else if (daNote.noteType == 1 && daNote.wasGoodHit && !thunderNoteHit)
-					{
-						trace(daNote.noteType + ' executed');
-						thunderNoteHit = true;
-
-						health -= 0.025;
-						vocals.volume = 0;
-						if (theFunne)
-							noteMiss(daNote.noteData, daNote);
-					}
 					else	
 					{
-						trace(daNote.noteType);
 						health -= 0.075;
 						vocals.volume = 0;
 						if (theFunne)
@@ -2299,29 +2288,12 @@ class PlayState extends MusicBeatState
 	private function keyShit():Void // I've invested in emma stocks
 	{
 		// control arrays, order L D R U
-		if (thunderNoteHit)
-		{
-			holdArray = [false, false, false, false];
-			pressArray = [false, false, false, false];
-			releaseArray = [false, false, false, false];
-			new FlxTimer().start(5, function(tmr:FlxTimer)
-			{
-				thunderNoteHit = false;
-
-				if (!FlxG.save.data.botplay)
-				{
-					holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
-					pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-					releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
-				}
-			});
-		}
-		else
+		/*if (!thunderNoteHit)
 		{
 			holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
 			pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
 			releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
-		}
+		}*/
 		
 		#if windows
 		if (luaModchart != null)
@@ -2678,7 +2650,31 @@ class PlayState extends MusicBeatState
 		if (mashViolations < 0)
 			mashViolations = 0;
 
-		if (!note.wasGoodHit)
+		/*if (note.noteType == 1 && !thunderNoteHit)
+		{
+			thunderNoteHit = true;
+
+			health -= 0.025;
+			vocals.volume = 0;
+			if (theFunne)
+				noteMiss(note.noteData, note);
+
+			holdArray = [false, false, false, false];
+			pressArray = [false, false, false, false];
+			releaseArray = [false, false, false, false];
+			new FlxTimer().start(5, function(tmr:FlxTimer)
+			{
+				thunderNoteHit = false;
+
+				if (!FlxG.save.data.botplay)
+				{
+					holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+					pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+					releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+				}
+			});
+		}
+		else*/ if (!note.wasGoodHit)
 		{
 			if (!note.isSustainNote)
 			{

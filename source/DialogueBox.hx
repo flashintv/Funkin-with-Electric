@@ -58,7 +58,7 @@ class DialogueBox extends FlxSpriteGroup
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'pnc' | 'volt':
+			case 'pnc' | 'volt' | 'trybolty':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
 				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
@@ -222,10 +222,10 @@ class DialogueBox extends FlxSpriteGroup
 				portraitElectric.visible = false;
 				portraitBF.visible = false;
 				box.flipX = true;
-				if (!portraitAngry.visible)
+				if (!portraitConfused.visible)
 				{
-					portraitAngry.visible = true;
-					// portraitAngry.animation.play('enter');
+					portraitConfused.visible = true;
+					// portraitConfused.animation.play('enter');
 				}
 			case 'emp':
 				portraitAngry.visible = false;
@@ -233,10 +233,10 @@ class DialogueBox extends FlxSpriteGroup
 				portraitConfused.visible = false;
 				portraitBF.visible = false;
 				box.flipX = true;
-				if (!portraitMad.visible)
+				if (!portraitElectric.visible)
 				{
-					portraitMad.visible = true;
-					// portraitMad.animation.play('enter');
+					portraitElectric.visible = true;
+					// portraitElectric.animation.play('enter');
 				}
 			case 'angry':
 				portraitConfused.visible = false;
