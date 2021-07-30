@@ -221,9 +221,9 @@ class PlayState extends MusicBeatState
 
 	// THINGIES
 	var thunderNoteHit:Bool = false;
-	var holdArray:Array<Bool> = [];
-	var pressArray:Array<Bool> = [];
-	var releaseArray:Array<Bool> = [];
+	var holdArray:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+	var pressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+	var releaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 
 	public function addObject(object:FlxBasic)
 	{
