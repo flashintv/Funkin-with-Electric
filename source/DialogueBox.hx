@@ -30,6 +30,9 @@ class DialogueBox extends FlxSpriteGroup
 
 	var portraitElectric:FlxSprite;
 	var portraitConfused:FlxSprite;
+	var portraitConfident:FlxSprite;
+	var portraitNervous:FlxSprite;
+	var portraitCorrupt:FlxSprite;
 	var portraitMad:FlxSprite;
 	var portraitAngry:FlxSprite;
 	var portraitBF:FlxSprite;
@@ -74,41 +77,54 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 		
-		portraitElectric = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/electricElectric', 'shared'));
-		// portraitElectric.setGraphicSize(Std.int(portraitElectric.width * PlayState.daPixelZoom * 0.9));
+		portraitElectric = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/normalElectric', 'shared'));
 		portraitElectric.updateHitbox();
 		portraitElectric.scrollFactor.set();
 		add(portraitElectric);
 		portraitElectric.visible = false;
 
 		portraitConfused = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/confusedElectric', 'shared'));
-		// portraitConfused.setGraphicSize(Std.int(portraitConfused.width * PlayState.daPixelZoom * 0.9));
 		portraitConfused.updateHitbox();
 		portraitConfused.scrollFactor.set();
 		add(portraitConfused);
 		portraitConfused.visible = false;
 
+		portraitConfident = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/confidentElectric', 'shared'));
+		portraitConfident.updateHitbox();
+		portraitConfident.scrollFactor.set();
+		add(portraitConfident);
+		portraitConfident.visible = false;
+
+		portraitNervous = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/nervousElectric', 'shared'));
+		portraitNervous.updateHitbox();
+		portraitNervous.scrollFactor.set();
+		add(portraitNervous);
+		portraitNervous.visible = false;
+
 		portraitAngry = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/angryElectric', 'shared'));
-		// portraitAngry.setGraphicSize(Std.int(portraitAngry.width * PlayState.daPixelZoom * 0.9));
 		portraitAngry.updateHitbox();
 		portraitAngry.scrollFactor.set();
 		add(portraitAngry);
 		portraitAngry.visible = false;
 
 		portraitMad = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/madElectric', 'shared'));
-		// portraitMad.setGraphicSize(Std.int(portraitMad.width * PlayState.daPixelZoom * 0.9));
 		portraitMad.updateHitbox();
 		portraitMad.scrollFactor.set();
 		add(portraitMad);
 		portraitMad.visible = false;
 
+		portraitCorrupt = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/corruptElectric', 'shared'));
+		portraitCorrupt.updateHitbox();
+		portraitCorrupt.scrollFactor.set();
+		add(portraitCorrupt);
+		portraitCorrupt.visible = false;
+
 		portraitBF = new FlxSprite(730, 210).loadGraphic(Paths.image('portraits/bfPortrait', 'shared'));
-		// portraitBF.setGraphicSize(Std.int(portraitBF.width * PlayState.daPixelZoom * 0.9));
 		portraitBF.updateHitbox();
 		portraitBF.scrollFactor.set();
 		add(portraitBF);
 		portraitBF.visible = false;
-		
+
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
 		box.updateHitbox();
@@ -177,6 +193,9 @@ class DialogueBox extends FlxSpriteGroup
 						bgFade.alpha -= 1 / 5 * 0.7;
 						portraitElectric.visible = false;
 						portraitConfused.visible = false;
+						portraitConfident.visible = false;
+						portraitNervous.visible = false;
+						portraitCorrupt.visible = false;
 						portraitAngry.visible = false;
 						portraitMad.visible = false;
 						portraitBF.visible = false;
@@ -216,60 +235,109 @@ class DialogueBox extends FlxSpriteGroup
 
 		switch (curCharacter)
 		{
+			case 'corrupt':
+				portraitAngry.visible = false;
+				portraitMad.visible = false;
+				portraitElectric.visible = false;
+				portraitBF.visible = false;
+				portraitConfident.visible = false;
+				portraitNervous.visible = false;
+				portraitConfused.visible = false;
+				box.flipX = true;
+				if (!portraitCorrupt.visible)
+				{
+					portraitCorrupt.visible = true;
+				}
 			case 'confused':
 				portraitAngry.visible = false;
 				portraitMad.visible = false;
 				portraitElectric.visible = false;
 				portraitBF.visible = false;
+				portraitConfident.visible = false;
+				portraitNervous.visible = false;
+				portraitCorrupt.visible = false;
 				box.flipX = true;
 				if (!portraitConfused.visible)
 				{
 					portraitConfused.visible = true;
-					// portraitConfused.animation.play('enter');
+				}
+			case 'confident':
+				portraitAngry.visible = false;
+				portraitMad.visible = false;
+				portraitElectric.visible = false;
+				portraitBF.visible = false;
+				portraitConfused.visible = false;
+				portraitNervous.visible = false;
+				portraitCorrupt.visible = false;
+				box.flipX = true;
+				if (!portraitConfident.visible)
+				{
+					portraitConfident.visible = true;
+				}
+			case 'nervous':
+				portraitAngry.visible = false;
+				portraitMad.visible = false;
+				portraitElectric.visible = false;
+				portraitBF.visible = false;
+				portraitConfident.visible = false;
+				portraitConfused.visible = false;
+				portraitCorrupt.visible = false;
+				box.flipX = true;
+				if (!portraitNervous.visible)
+				{
+					portraitNervous.visible = true;
 				}
 			case 'emp':
 				portraitAngry.visible = false;
 				portraitMad.visible = false;
 				portraitConfused.visible = false;
 				portraitBF.visible = false;
+				portraitConfident.visible = false;
+				portraitNervous.visible = false;
+				portraitCorrupt.visible = false;
 				box.flipX = true;
 				if (!portraitElectric.visible)
 				{
 					portraitElectric.visible = true;
-					// portraitElectric.animation.play('enter');
 				}
 			case 'angry':
 				portraitConfused.visible = false;
 				portraitMad.visible = false;
 				portraitElectric.visible = false;
 				portraitBF.visible = false;
+				portraitConfident.visible = false;
+				portraitNervous.visible = false;
+				portraitCorrupt.visible = false;
 				box.flipX = true;
 				if (!portraitAngry.visible)
 				{
 					portraitAngry.visible = true;
-					// portraitAngry.animation.play('enter');
 				}
 			case 'mad':
 				portraitAngry.visible = false;
 				portraitElectric.visible = false;
 				portraitConfused.visible = false;
 				portraitBF.visible = false;
+				portraitConfident.visible = false;
+				portraitNervous.visible = false;
+				portraitCorrupt.visible = false;
 				box.flipX = true;
 				if (!portraitMad.visible)
 				{
 					portraitMad.visible = true;
-					// portraitMad.animation.play('enter');
 				}
 			case 'bf':
 				portraitAngry.visible = false;
 				portraitMad.visible = false;
 				portraitConfused.visible = false;
 				portraitElectric.visible = false;
+				portraitConfident.visible = false;
+				portraitNervous.visible = false;
+				portraitCorrupt.visible = false;
 				box.flipX = false;
 				if (!portraitBF.visible)
 				{
 					portraitBF.visible = true;
-					// portraitBF.animation.play('enter');
 				}
 		}
 	}

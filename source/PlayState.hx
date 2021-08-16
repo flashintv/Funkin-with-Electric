@@ -221,9 +221,6 @@ class PlayState extends MusicBeatState
 
 	// THINGIES
 	var thunderNoteHit:Bool = false;
-	var holdArray:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
-	var pressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-	var releaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 
 	public function addObject(object:FlxBasic)
 	{
@@ -2287,6 +2284,10 @@ class PlayState extends MusicBeatState
 
 	private function keyShit():Void // I've invested in emma stocks
 	{
+		var holdArray:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+		var pressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+		var releaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+
 		#if windows
 		if (luaModchart != null)
 		{
@@ -2310,7 +2311,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		// Prevent player input if botplay is on
-		if (FlxG.save.data.botplay)
+		if (FlxG.save.data.botplay || thunderNoteHit)
 		{
 			holdArray = [false, false, false, false];
 			pressArray = [false, false, false, false];
@@ -2678,16 +2679,9 @@ class PlayState extends MusicBeatState
 					boyfriend.playAnim('singRIGHTmiss', true);
 			}
 
-			holdArray = [false, false, false, false];
-			pressArray = [false, false, false, false];
-			releaseArray = [false, false, false, false];
 			new FlxTimer().start(5, function(tmr:FlxTimer)
 			{
 				thunderNoteHit = false;
-
-				holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
-				pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-				releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 			});
 		}
 		else if (!note.wasGoodHit)

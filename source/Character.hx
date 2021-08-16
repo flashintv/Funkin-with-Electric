@@ -498,8 +498,9 @@ class Character extends FlxSprite
 				addOffset("singDOWN-alt", -30, -27);
 
 				playAnim('idle');
+				
 			case 'electric':
-				frames = Paths.getSparrowAtlas('characters/Electric_Assets', 'week1');
+				frames = Paths.getSparrowAtlas('characters/Electric_Assets', 'shared');
 
 				animation.addByPrefix('idle', 'Idle', 24);
 				animation.addByPrefix('singUP', 'Up', 24);
@@ -514,14 +515,15 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 0, 0);
 
 				playAnim('idle');
-			case 'electric-god':
-				frames = Paths.getSparrowAtlas('characters/Electric_Thunder_GOD', 'week1');
 
-				animation.addByPrefix('idle', 'Electric Thunder GOD idle', 24);
-				animation.addByPrefix('singUP', 'Electric Thunder GOD up', 24);
-				animation.addByPrefix('singRIGHT', 'Electric Thunder GOD right', 24);
-				animation.addByPrefix('singDOWN', 'Electric Thunder GOD down', 24);
-				animation.addByPrefix('singLEFT', 'Electric Thunder GOD left', 24);
+			case 'electric-god':
+				frames = Paths.getSparrowAtlas('characters/Electric_God', 'shared');
+
+				animation.addByPrefix('idle', 'Electric God idle', 24);
+				animation.addByPrefix('singUP', 'Electric God Up', 24);
+				animation.addByPrefix('singRIGHT', 'Electric God Right', 24);
+				animation.addByPrefix('singDOWN', 'Electric God Down', 24);
+				animation.addByPrefix('singLEFT', 'Electric God Left', 24);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 50);
@@ -530,8 +532,9 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 0, -30);
 
 				playAnim('idle');
+
 			case 'electric-mad':
-				frames = Paths.getSparrowAtlas('characters/ElectricMad', 'week1');
+				frames = Paths.getSparrowAtlas('characters/ElectricMad', 'shared');
 
 				animation.addByPrefix('idle', 'ElectricMad idle', 24);
 				animation.addByPrefix('singUP', 'ElectricMad up', 24);
