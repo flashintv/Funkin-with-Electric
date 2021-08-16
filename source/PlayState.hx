@@ -997,11 +997,11 @@ class PlayState extends MusicBeatState
 
 			for (songNotes in section.sectionNotes)
 			{
-				var daNoteType = songNotes[3];
 				var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
 				if (daStrumTime < 0)
 					daStrumTime = 0;
 				var daNoteData:Int = Std.int(songNotes[1] % 8);
+				var daNoteType = songNotes[3];
 
 				var gottaHitNote:Bool = section.mustHitSection;
 
@@ -1029,7 +1029,7 @@ class PlayState extends MusicBeatState
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true);
+					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true, daNoteType);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
 
@@ -2287,14 +2287,6 @@ class PlayState extends MusicBeatState
 
 	private function keyShit():Void // I've invested in emma stocks
 	{
-		// control arrays, order L D R U
-		/*if (!thunderNoteHit)
-		{
-			holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
-			pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-			releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
-		}*/
-		
 		#if windows
 		if (luaModchart != null)
 		{
@@ -2448,19 +2440,22 @@ class PlayState extends MusicBeatState
 				// Force good note hit regardless if it's too late to hit it or not as a fail safe
 				if (FlxG.save.data.botplay && daNote.canBeHit && daNote.mustPress || FlxG.save.data.botplay && daNote.tooLate && daNote.mustPress)
 				{
-					if (loadRep)
+					if (daNote.noteType != 1)
 					{
-						// trace('ReplayNote ' + tmpRepNote.strumtime + ' | ' + tmpRepNote.direction);
-						if (rep.replay.songNotes.contains(HelperFunctions.truncateFloat(daNote.strumTime, 2)))
-						{
-							goodNoteHit(daNote);
-							boyfriend.holdTimer = daNote.sustainLength;
-						}
-					}
-					else
-					{
-						goodNoteHit(daNote);
-						boyfriend.holdTimer = daNote.sustainLength;
+						if (loadRep)
+							{
+								// trace('ReplayNote ' + tmpRepNote.strumtime + ' | ' + tmpRepNote.direction);
+								if (rep.replay.songNotes.contains(HelperFunctions.truncateFloat(daNote.strumTime, 2)))
+								{
+									goodNoteHit(daNote);
+									boyfriend.holdTimer = daNote.sustainLength;
+								}
+							}
+							else
+							{
+								goodNoteHit(daNote);
+								boyfriend.holdTimer = daNote.sustainLength;
+							}
 					}
 				}
 			}
@@ -2650,14 +2645,38 @@ class PlayState extends MusicBeatState
 		if (mashViolations < 0)
 			mashViolations = 0;
 
-		/*if (note.noteType == 1 && !thunderNoteHit)
+		if (note.noteType == 1 && !thunderNoteHit)
 		{
 			thunderNoteHit = true;
 
 			health -= 0.025;
 			vocals.volume = 0;
-			if (theFunne)
-				noteMiss(note.noteData, note);
+			if (combo > 5 && gf.animOffsets.exists('sad'))
+			{
+				gf.playAnim('sad');
+			}
+
+			combo = 0;
+			misses++;
+
+			if (FlxG.save.data.accuracyMod == 1)
+				totalNotesHit -= 1;
+
+			songScore -= 10;
+
+			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+
+			switch (note.noteData)
+			{
+				case 0:
+					boyfriend.playAnim('singLEFTmiss', true);
+				case 1:
+					boyfriend.playAnim('singDOWNmiss', true);
+				case 2:
+					boyfriend.playAnim('singUPmiss', true);
+				case 3:
+					boyfriend.playAnim('singRIGHTmiss', true);
+			}
 
 			holdArray = [false, false, false, false];
 			pressArray = [false, false, false, false];
@@ -2666,15 +2685,12 @@ class PlayState extends MusicBeatState
 			{
 				thunderNoteHit = false;
 
-				if (!FlxG.save.data.botplay)
-				{
-					holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
-					pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-					releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
-				}
+				holdArray = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
+				pressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+				releaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 			});
 		}
-		else*/ if (!note.wasGoodHit)
+		else if (!note.wasGoodHit)
 		{
 			if (!note.isSustainNote)
 			{
@@ -2829,9 +2845,12 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+		if (!thunderNoteHit)
 		{
-			boyfriend.playAnim('idle');
+			if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+			{
+				boyfriend.playAnim('idle');
+			}
 		}
 	}
 
