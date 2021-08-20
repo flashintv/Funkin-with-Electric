@@ -30,7 +30,7 @@ class StoryMenuState extends MusicBeatState
 
 	var trackData:Array<Dynamic> = [
 		['Tutorial'],
-		['Plugs N Connections', 'V.O.L.T']
+		['Plugs N Connections', 'V.O.L.T', 'TryBolty']
 	];
 
 	var curDifficulty:Int = 1;
