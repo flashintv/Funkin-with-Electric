@@ -155,11 +155,9 @@ class Note extends FlxSprite
 				if (FlxG.save.data.downscroll)
 					flipY = true;
 
-				x -= 50;
-
 				updateHitbox();
 				antialiasing = true;
-				setGraphicSize(Std.int(width * 0.66));
+				setGraphicSize(Std.int(width * 0.7));
 			}
 		}
 
