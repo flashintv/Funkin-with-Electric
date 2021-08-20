@@ -34,7 +34,12 @@ class CreditsSubState extends MusicBeatSubstate
 			textMenuItems.push(new ListUserdata(data[0], data[1], Std.parseInt(data[2]), data[3], data[4]));
 		}
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		if (!FlxG.sound.music.playing)
+		{
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		}
+
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBGMagenta'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.15;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));

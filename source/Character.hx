@@ -514,6 +514,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -10, 0);
 				addOffset("singDOWN", 0, 0);
 
+				setGraphicSize(Std.int(width * 0.7));
 				playAnim('idle');
 
 			case 'electric-god':

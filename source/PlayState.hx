@@ -368,7 +368,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.9;
 					curStage = 'park';
 
-					var bg:FlxSprite = new FlxSprite(-600, -170).loadGraphic(Paths.image('parkBG', 'week1'));
+					var bg:FlxSprite = new FlxSprite(-500, -170).loadGraphic(Paths.image('parkBG', 'week1'));
 					bg.antialiasing = true;
 					bg.scrollFactor.set(0.9, 0.9);
 					bg.active = false;
@@ -1949,7 +1949,7 @@ class PlayState extends MusicBeatState
 					transIn = FlxTransitionableState.defaultTransIn;
 					transOut = FlxTransitionableState.defaultTransOut;
 
-					FlxG.switchState(new StoryMenuState());
+					FlxG.switchState(new EndingState());
 
 					#if windows
 					if (luaModchart != null)
@@ -1959,7 +1959,6 @@ class PlayState extends MusicBeatState
 					}
 					#end
 
-					// if ()
 					StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 
 					if (SONG.validScore)
@@ -2311,7 +2310,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		// Prevent player input if botplay is on
-		if (FlxG.save.data.botplay)
+		if (FlxG.save.data.botplay || thunderNoteHit)
 		{
 			holdArray = [false, false, false, false];
 			pressArray = [false, false, false, false];
@@ -2531,6 +2530,16 @@ class PlayState extends MusicBeatState
 
 				updateAccuracy();
 			}
+		}
+		else
+		{
+			if (!daNote.isSustainNote)
+			{
+				popUpScore(daNote);
+				combo += 1;
+			}
+			else
+				totalNotesHit += 1;
 		}
 	}
 
