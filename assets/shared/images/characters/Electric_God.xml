@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="Electric God.png"><SubTexture name="Electric God idle0000" x="0" y="0" width="772" height="772" frameX="0" frameY="0" frameWidth="772" frameHeight="772" />
+<TextureAtlas imagePath="Electric God.png">
+<SubTexture name="Electric God idle0000" x="0" y="0" width="772" height="772" frameX="0" frameY="0" frameWidth="772" frameHeight="772" />
 <SubTexture name="Electric God idle0001" x="772" y="0" width="772" height="772" frameX="0" frameY="0" frameWidth="772" frameHeight="772" />
 <SubTexture name="Electric God idle0002" x="1544" y="0" width="772" height="772" frameX="0" frameY="0" frameWidth="772" frameHeight="772" />
 <SubTexture name="Electric God idle0003" x="2316" y="0" width="772" height="772" frameX="0" frameY="0" frameWidth="772" frameHeight="772" />

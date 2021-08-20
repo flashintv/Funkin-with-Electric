@@ -34,7 +34,7 @@ class CreditsSubState extends MusicBeatSubstate
 			textMenuItems.push(new ListUserdata(data[0], data[1], Std.parseInt(data[2]), data[3], data[4]));
 		}
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBGMagenta'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.15;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
@@ -74,7 +74,7 @@ class CreditsSubState extends MusicBeatSubstate
 		add(usersAvatar);
 
 		remove(usersWork);
-		usersWork = new FlxText(450, 300, 0, textMenuItems[curSelected].curWork, 32, true);
+		usersWork = new FlxText(450, 340, 0, textMenuItems[curSelected].curWork, 64, true);
 		usersWork.text = StringTools.replace(usersWork.text, "\\n", " \n\n");
 		usersWork.font = 'VCR OSD Mono';
 		add(usersWork);

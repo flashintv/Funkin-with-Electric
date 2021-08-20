@@ -502,11 +502,11 @@ class Character extends FlxSprite
 			case 'electric':
 				frames = Paths.getSparrowAtlas('characters/Electric_Assets', 'shared');
 
-				animation.addByPrefix('idle', 'Idle', 24);
-				animation.addByPrefix('singUP', 'Up', 24);
-				animation.addByPrefix('singRIGHT', 'Right', 24);
-				animation.addByPrefix('singDOWN', 'Down', 24);
-				animation.addByPrefix('singLEFT', 'Left', 24);
+				animation.addByPrefix('idle', 'idle', 24);
+				animation.addByPrefix('singUP', 'up', 24);
+				animation.addByPrefix('singRIGHT', 'right', 24);
+				animation.addByPrefix('singDOWN', 'down', 24);
+				animation.addByPrefix('singLEFT', 'left', 24);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 0);

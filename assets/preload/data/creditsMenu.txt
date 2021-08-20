@@ -1,9 +1,9 @@
-ElectricMP:electric:0:- The Founder \n- Charter \n- Artist
+ElectricMP:electric:0:- The Creator \n- Charter \n- Artist
 Bruz:bruz:0:- Artist
 Pokey:pokey:0:- Playtester
 Aeroxya:aeroxya:0:- Musician
 Milk:milk:0:- Charter
-PoisonShroom101:shroom:0:- Charter
+PoisonShroom:shroom:0:- Charter
 Galactic:galactic:0:- Helped with the mod
 Sirj:sirj:0:- Charter
 Grizzle:grizzle:1:- Coder
