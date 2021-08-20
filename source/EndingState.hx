@@ -14,7 +14,12 @@ class EndingState extends MusicBeatSubstate
 
     override function create() 
     {
-        var endingSprite:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('secretfolder/thankyou', 'shared'));
+        if (!FlxG.sound.music.playing)
+		{
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		}
+
+        var endingSprite:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('secret_folder/thankyou', 'preload'));
         add(endingSprite);
 
         blinkingWhite = new FlxSprite(830, 531).makeGraphic(270, 74, FlxColor.WHITE);
@@ -27,7 +32,7 @@ class EndingState extends MusicBeatSubstate
     {
         if (controls.ACCEPT)
 		{
-			FlxFlicker.flicker(blinkingWhite, 1, 0.1, false, true, function(_)
+			FlxFlicker.flicker(blinkingWhite, 1, 0.05, false, true, function(_)
             {
                 FlxG.switchState(new MainMenuState());
             });

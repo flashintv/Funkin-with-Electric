@@ -30,7 +30,7 @@ class StoryMenuState extends MusicBeatState
 
 	var trackData:Array<Dynamic> = [
 		['Tutorial'],
-		['Plugs N Connections', 'V.O.L.T', 'TryBolty']
+		['Plugs N Connections', 'V.O.L.T']
 	];
 
 	var curDifficulty:Int = 1;
@@ -223,6 +223,11 @@ class StoryMenuState extends MusicBeatState
 				{
 					changeWeek(1);
 				}
+
+				#if debug
+				if (FlxG.keys.pressed.H)
+					FlxG.switchState(new EndingState());
+				#end
 
 				if (controls.RIGHT)
 					rightArrow.animation.play('press')

@@ -459,6 +459,9 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'electric':
+				dad.x -= 100;
+				dad.y -= 50;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -2511,16 +2514,19 @@ class PlayState extends MusicBeatState
 				// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 				// FlxG.log.add('played imss note');
 
-				switch (direction)
+				if (!thunderNoteHit)
 				{
-					case 0:
-						boyfriend.playAnim('singLEFTmiss', true);
-					case 1:
-						boyfriend.playAnim('singDOWNmiss', true);
-					case 2:
-						boyfriend.playAnim('singUPmiss', true);
-					case 3:
-						boyfriend.playAnim('singRIGHTmiss', true);
+					switch (direction)
+					{
+						case 0:
+							boyfriend.playAnim('singLEFTmiss', true);
+						case 1:
+							boyfriend.playAnim('singDOWNmiss', true);
+						case 2:
+							boyfriend.playAnim('singUPmiss', true);
+						case 3:
+							boyfriend.playAnim('singRIGHTmiss', true);
+					}
 				}
 
 				#if windows
@@ -2691,7 +2697,7 @@ class PlayState extends MusicBeatState
 					boyfriend.playAnim('singRIGHTmiss', true);
 			}
 
-			new FlxTimer().start(5, function(tmr:FlxTimer)
+			new FlxTimer().start(2.5, function(tmr:FlxTimer) // THE TIMER THAT STUNS YOU
 			{
 				thunderNoteHit = false;
 			});
