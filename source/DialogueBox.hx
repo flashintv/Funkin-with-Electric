@@ -29,6 +29,7 @@ class DialogueBox extends FlxSpriteGroup
 	public var finishThing:Void->Void;
 
 	// Cutscene backgrounds 
+	var backgroundBlack:FlxSprite;
 	var backgroundOne:FlxSprite;
 	var backgroundTwo:FlxSprite;
 	var backgroundThr:FlxSprite;
@@ -70,6 +71,7 @@ class DialogueBox extends FlxSpriteGroup
 		box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
 		box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+		box.animation.addByPrefix('leBronJames', 'lebronjames', 24, true);
 		box.width = 200;
 		box.height = 200;
 		box.x = -100;
@@ -81,71 +83,84 @@ class DialogueBox extends FlxSpriteGroup
 		portraitElectric.updateHitbox();
 		portraitElectric.scrollFactor.set();
 		add(portraitElectric);
-		portraitElectric.visible = false;
+		portraitElectric.alpha = 0;
 
 		portraitConfused = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/confusedElectric', 'shared'));
 		portraitConfused.updateHitbox();
 		portraitConfused.scrollFactor.set();
 		add(portraitConfused);
-		portraitConfused.visible = false;
+		portraitConfused.alpha = 0;
 
 		portraitConfident = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/confidentElectric', 'shared'));
 		portraitConfident.updateHitbox();
 		portraitConfident.scrollFactor.set();
 		add(portraitConfident);
-		portraitConfident.visible = false;
+		portraitConfident.alpha = 0;
 
 		portraitNervous = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/nervousElectric', 'shared'));
 		portraitNervous.updateHitbox();
 		portraitNervous.scrollFactor.set();
 		add(portraitNervous);
-		portraitNervous.visible = false;
+		portraitNervous.alpha = 0;
 
 		portraitAngry = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/angryElectric', 'shared'));
 		portraitAngry.updateHitbox();
 		portraitAngry.scrollFactor.set();
 		add(portraitAngry);
-		portraitAngry.visible = false;
+		portraitAngry.alpha = 0;
 
 		portraitMad = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/madElectric', 'shared'));
 		portraitMad.updateHitbox();
 		portraitMad.scrollFactor.set();
 		add(portraitMad);
-		portraitMad.visible = false;
+		portraitMad.alpha = 0;
 
 		portraitCorrupt = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/corruptElectric', 'shared'));
 		portraitCorrupt.updateHitbox();
 		portraitCorrupt.scrollFactor.set();
 		add(portraitCorrupt);
-		portraitCorrupt.visible = false;
+		portraitCorrupt.alpha = 0;
 
 		portraitBF = new FlxSprite(730, 210).loadGraphic(Paths.image('portraits/bfPortrait', 'shared'));
 		portraitBF.updateHitbox();
 		portraitBF.scrollFactor.set();
 		add(portraitBF);
-		portraitBF.visible = false;
+		portraitBF.alpha = 0;
 
 		if (PlayState.SONG.song.toLowerCase() == 'trybolty')
 		{
+			backgroundBlack = new FlxSprite(0, 0).makeGraphic(1280, 768, FlxColor.BLACK);
+			add(backgroundBlack);
+			backgroundBlack.screenCenter();
+			backgroundBlack.alpha = 0;
+
 			backgroundOne = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg1', 'electricWeek'));
+			backgroundOne.setGraphicSize(1280, 768);
 			add(backgroundOne);
-			backgroundOne.visible = false;
+			backgroundOne.screenCenter();
+			backgroundOne.alpha = 0;
 
 			backgroundTwo = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg2', 'electricWeek'));
+			backgroundTwo.setGraphicSize(1280, 768);
 			add(backgroundTwo);
-			backgroundTwo.visible = false;
+			backgroundTwo.screenCenter();
+			backgroundTwo.alpha = 0;
 
 			backgroundThr = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg3', 'electricWeek'));
+			backgroundThr.setGraphicSize(1280, 768);
 			add(backgroundThr);
-			backgroundThr.visible = false;
+			backgroundThr.screenCenter();
+			backgroundThr.alpha = 0;
 
 			backgroundFou = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg4', 'electricWeek'));
+			backgroundFou.setGraphicSize(1280, 768);
 			add(backgroundFou);
-			backgroundFou.visible = false;
+			backgroundFou.screenCenter();
+			backgroundFou.alpha = 0;
 
-			unknownPortrait = new FlxSprite(90, 360).loadGraphic(Paths.image('portraits/unknownPortrait', 'shared'));
+			unknownPortrait = new FlxSprite(110, 330).loadGraphic(Paths.image('portraits/unknownPortrait', 'shared'));
 			add(unknownPortrait);
-			unknownPortrait.visible = false;
+			unknownPortrait.alpha = 0;
 		}
 
 		box.animation.play('normalOpen');
@@ -210,14 +225,20 @@ class DialogueBox extends FlxSpriteGroup
 					{
 						box.alpha -= 1 / 5;
 						bgFade.alpha -= 1 / 5 * 0.7;
-						portraitElectric.visible = false;
-						portraitConfused.visible = false;
-						portraitConfident.visible = false;
-						portraitNervous.visible = false;
-						portraitCorrupt.visible = false;
-						portraitAngry.visible = false;
-						portraitMad.visible = false;
-						portraitBF.visible = false;
+						portraitElectric.alpha -= 1 / 5;
+						portraitConfused.alpha -= 1 / 5;
+						portraitConfident.alpha -= 1 / 5;
+						portraitNervous.alpha -= 1 / 5;
+						portraitCorrupt.alpha -= 1 / 5;
+						portraitAngry.alpha -= 1 / 5;
+						portraitMad.alpha -= 1 / 5;
+						portraitBF.alpha -= 1 / 5;
+						unknownPortrait.alpha -= 1 / 5;
+						backgroundBlack.alpha -= 1 / 5;
+						backgroundOne.alpha -= 1 / 5;
+						backgroundTwo.alpha -= 1 / 5;
+						backgroundThr.alpha -= 1 / 5;
+						backgroundFou.alpha -= 1 / 5;
 						swagDialogue.alpha -= 1 / 5;
 						dropText.alpha = swagDialogue.alpha;
 					}, 5);
@@ -257,121 +278,130 @@ class DialogueBox extends FlxSpriteGroup
 			switch (curCharacter) // TODO: could've done just for members so it does it for me but i guess fuck me
 			{
 				case 'corrupt':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitElectric.visible = false;
-					portraitBF.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitConfused.visible = false;
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitConfused.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitCorrupt.visible)
+					if (portraitCorrupt.alpha == 0)
 					{
-						portraitCorrupt.visible = true;
+						portraitCorrupt.alpha = 1;
 					}
 				case 'confused':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitElectric.visible = false;
-					portraitBF.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitConfused.visible)
+					if (portraitConfused.alpha == 0)
 					{
-						portraitConfused.visible = true;
+						portraitConfused.alpha = 1;
 					}
 				case 'confident':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitElectric.visible = false;
-					portraitBF.visible = false;
-					portraitConfused.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitConfident.visible)
+					if (portraitConfident.alpha == 0)
 					{
-						portraitConfident.visible = true;
+						portraitConfident.alpha = 1;
 					}
 				case 'nervous':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitElectric.visible = false;
-					portraitBF.visible = false;
-					portraitConfident.visible = false;
-					portraitConfused.visible = false;
-					portraitCorrupt.visible = false;
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitNervous.visible)
+					if (portraitNervous.alpha == 0)
 					{
-						portraitNervous.visible = true;
+						portraitNervous.alpha = 1;
 					}
 				case 'emp':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitBF.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitElectric.visible)
+					if (portraitElectric.alpha == 0)
 					{
-						portraitElectric.visible = true;
+						portraitElectric.alpha = 1;
 					}
 				case 'angry':
-					portraitConfused.visible = false;
-					portraitMad.visible = false;
-					portraitElectric.visible = false;
-					portraitBF.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
+					portraitConfused.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitAngry.visible)
+					if (portraitAngry.alpha == 0)
 					{
-						portraitAngry.visible = true;
+						portraitAngry.alpha = 1;
 					}
 				case 'mad':
-					portraitAngry.visible = false;
-					portraitElectric.visible = false;
-					portraitConfused.visible = false;
-					portraitBF.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
+					portraitAngry.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitBF.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = true;
-					if (!portraitMad.visible)
+					if (portraitMad.alpha == 0)
 					{
-						portraitMad.visible = true;
+						portraitMad.alpha = 1;
 					}
 				case 'bf':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					unknownPortrait.alpha = 0;
 					box.flipX = false;
-					if (!portraitBF.visible)
+					if (portraitBF.alpha == 0)
 					{
-						portraitBF.visible = true;
+						portraitBF.alpha = 1;
 					}
 				case '???' | 'unknown':
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
-					portraitBF.visible = false;
-					if (!unknownPortrait.visible)
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					portraitBF.alpha = 0;
+					unknownPortrait.alpha = 0;
+					if (unknownPortrait.alpha == 0)
 					{
-						unknownPortrait.visible = true;
+						unknownPortrait.alpha = 1;
 					}
 			}
 		}
@@ -380,117 +410,131 @@ class DialogueBox extends FlxSpriteGroup
 			switch (curBackground)
 			{
 				case 'bg1':
+					box.animation.play('leBronJames', true);
 					// Backgrounds
-					backgroundFou.visible = false;
-					backgroundTwo.visible = false;
-					backgroundThr.visible = false;
+					backgroundFou.alpha = 0;
+					backgroundTwo.alpha = 0;
+					backgroundThr.alpha = 0;
+					backgroundBlack.alpha = 0;
 
 					// Characters
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
-					portraitBF.visible = false;
-					if (!backgroundOne.visible)
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					portraitBF.alpha = 0;
+					unknownPortrait.alpha = 0;
+					if (backgroundOne.alpha == 0)
 					{
-						backgroundOne.visible = true;
+						backgroundOne.alpha = 1;
 					}
 				case 'bg2':
+					box.animation.play('leBronJames', true);
 					// Backgrounds
-					backgroundOne.visible = false;
-					backgroundFou.visible = false;
-					backgroundThr.visible = false;
+					backgroundOne.alpha = 0;
+					backgroundFou.alpha = 0;
+					backgroundThr.alpha = 0;
+					backgroundBlack.alpha = 0;
 
 					// Characters
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
-					portraitBF.visible = false;
-					if (!backgroundTwo.visible)
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					portraitBF.alpha = 0;
+					unknownPortrait.alpha = 0;
+					if (backgroundTwo.alpha == 0)
 					{
-						backgroundTwo.visible = true;
+						backgroundTwo.alpha = 1;
 					}
 				case 'bg3':
+					box.animation.play('leBronJames', true);
 					// Backgrounds
-					backgroundOne.visible = false;
-					backgroundTwo.visible = false;
-					backgroundFou.visible = false;
+					backgroundOne.alpha = 0;
+					backgroundTwo.alpha = 0;
+					backgroundFou.alpha = 0;
+					backgroundBlack.alpha = 0;
 
 					// Characters
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
-					portraitBF.visible = false;
-					if (!backgroundThr.visible)
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					portraitBF.alpha = 0;
+					unknownPortrait.alpha = 0;
+					if (backgroundThr.alpha == 0)
 					{
-						backgroundThr.visible = true;
+						backgroundThr.alpha = 1;
 					}
 				case 'bg4':
+					box.animation.play('leBronJames', true);
 					// Backgrounds
-					backgroundOne.visible = false;
-					backgroundTwo.visible = false;
-					backgroundThr.visible = false;
+					backgroundOne.alpha = 0;
+					backgroundTwo.alpha = 0;
+					backgroundThr.alpha = 0;
+					backgroundBlack.alpha = 0;
 
 					// Characters
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
-					portraitBF.visible = false;
-					if (!backgroundFou.visible)
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					portraitBF.alpha = 0;
+					unknownPortrait.alpha = 0;
+					if (backgroundFou.alpha == 0)
 					{
-						backgroundFou.visible = true;
+						backgroundFou.alpha = 1;
+					}
+				case 'default':
+					box.animation.play('leBronJames', true);
+					backgroundOne.alpha = 0;
+					backgroundTwo.alpha = 0;
+					backgroundThr.alpha = 0;
+					backgroundFou.alpha = 0;
+
+					// Characters
+					portraitAngry.alpha = 0;
+					portraitMad.alpha = 0;
+					portraitConfused.alpha = 0;
+					portraitElectric.alpha = 0;
+					portraitConfident.alpha = 0;
+					portraitNervous.alpha = 0;
+					portraitCorrupt.alpha = 0;
+					portraitBF.alpha = 0;
+					unknownPortrait.alpha = 0;
+					if (backgroundBlack.alpha == 0)
+					{
+						backgroundBlack.alpha = 1;
 					}
 				default:
-					// Backgrounds
-					backgroundOne.visible = false;
-					backgroundTwo.visible = false;
-					backgroundThr.visible = false;
-					backgroundFou.visible = false;
-
-					// Characters
-					portraitAngry.visible = false;
-					portraitMad.visible = false;
-					portraitConfused.visible = false;
-					portraitElectric.visible = false;
-					portraitConfident.visible = false;
-					portraitNervous.visible = false;
-					portraitCorrupt.visible = false;
-					portraitBF.visible = false;
+					box.animation.play('normal', true);
+					backgroundOne.alpha = 0;
+					backgroundTwo.alpha = 0;
+					backgroundThr.alpha = 0;
+					backgroundFou.alpha = 0;
+					backgroundBlack.alpha = 0;
 			}
 		}
 	}
 
 	function cleanDialog():Void
 	{
-		var splitChar:Array<String>;
 		var splitName:Array<String> = dialogueList[0].split(":");
-		if (PlayState.SONG.song.toLowerCase() == 'trybolty')
-		{
-			splitChar = splitName[1].split("|");
-			curCharacter = splitChar[1];
-			curBackground = splitChar[0];
-			//dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
-		}
-		else
-		{
-			curCharacter = splitName[1];
-			//dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
-		}
+		var splitChar:Array<String> = splitName[1].split("|");
+		curCharacter = splitChar[0];
+		curBackground = splitChar[1];
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
 	}
 
