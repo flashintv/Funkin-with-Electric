@@ -1,3 +1,5 @@
 Tutorial:gf:1:Tutorial
 PnC:electric:1:Plugs N Connections
-VOLT:electric-mad:1:V.O.L.T
+VOLT:electric-nervous:1:V.O.L.T
+TryBolty:electric-god:1:TryBolty
+Outcome:electric-nervous:1:Outcome

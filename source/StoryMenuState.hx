@@ -25,12 +25,12 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['PnC', 'VOLT']
+		['PnC', 'VOLT', 'TryBolty', 'Outcome']
 	];
 
 	var trackData:Array<Dynamic> = [
 		['Tutorial'],
-		['Plugs N Connections', 'V.O.L.T']
+		['Plugs N Connections', 'V.O.L.T', 'TryBolty', 'Outcome']
 	];
 
 	var curDifficulty:Int = 1;

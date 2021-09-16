@@ -1,20 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="Nervous_Electric.png"><SubTexture name="Nervous_Electric idle0000" x="0" y="0" width="440" height="920" frameX="0" frameY="0" frameWidth="440" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0001" x="440" y="0" width="476" height="920" frameX="0" frameY="0" frameWidth="476" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0002" x="916" y="0" width="510" height="920" frameX="0" frameY="0" frameWidth="510" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0003" x="1426" y="0" width="510" height="920" frameX="0" frameY="0" frameWidth="510" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0004" x="0" y="920" width="525" height="920" frameX="0" frameY="0" frameWidth="525" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0005" x="525" y="920" width="494" height="920" frameX="0" frameY="0" frameWidth="494" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0006" x="1019" y="920" width="476" height="920" frameX="0" frameY="0" frameWidth="476" frameHeight="920" />
-<SubTexture name="Nervous_Electric idle0007" x="1495" y="920" width="476" height="920" frameX="0" frameY="0" frameWidth="476" frameHeight="920" />
+<TextureAtlas imagePath="Nervous_Electric.png">
+<SubTexture name="Nervous_Electric idle0000" x="0" y="0" width="440" height="920" frameX="0" frameY="0" frameWidth="440" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0001" x="440" y="0" width="476" height="920" frameX="36" frameY="0" frameWidth="476" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0002" x="916" y="0" width="510" height="920" frameX="70" frameY="0" frameWidth="510" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0003" x="1426" y="0" width="510" height="920" frameX="70" frameY="0" frameWidth="510" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0004" x="0" y="920" width="525" height="920" frameX="85" frameY="0" frameWidth="525" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0005" x="525" y="920" width="494" height="920" frameX="54" frameY="0" frameWidth="494" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0006" x="1019" y="920" width="476" height="920" frameX="36" frameY="0" frameWidth="476" frameHeight="920" />
+<SubTexture name="Nervous_Electric idle0007" x="1495" y="920" width="476" height="920" frameX="36" frameY="0" frameWidth="476" frameHeight="920" />
 <SubTexture name="Nervous_Electric idle0008" x="0" y="1840" width="440" height="920" frameX="0" frameY="0" frameWidth="440" frameHeight="920" />
-<SubTexture name="Nervous_Electric down0000" x="440" y="1840" width="496" height="826" frameX="0" frameY="0" frameWidth="496" frameHeight="826" />
-<SubTexture name="Nervous_Electric down0001" x="936" y="1840" width="426" height="826" frameX="0" frameY="0" frameWidth="426" frameHeight="826" />
-<SubTexture name="Nervous_Electric down0002" x="1362" y="1840" width="426" height="826" frameX="0" frameY="0" frameWidth="426" frameHeight="826" />
-<SubTexture name="Nervous_Electric left0000" x="0" y="2760" width="412" height="926" frameX="0" frameY="0" frameWidth="412" frameHeight="926" />
-<SubTexture name="Nervous_Electric left0001" x="412" y="2760" width="412" height="926" frameX="0" frameY="0" frameWidth="412" frameHeight="926" />
-<SubTexture name="Nervous_Electric right0000" x="824" y="2760" width="512" height="908" frameX="0" frameY="0" frameWidth="512" frameHeight="908" />
-<SubTexture name="Nervous_Electric right0001" x="1336" y="2760" width="531" height="897" frameX="0" frameY="0" frameWidth="531" frameHeight="897" />
-<SubTexture name="Nervous_Electric up0000" x="0" y="3686" width="428" height="949" frameX="0" frameY="0" frameWidth="428" frameHeight="949" />
-<SubTexture name="Nervous_Electric up0001" x="428" y="3686" width="427" height="955" frameX="0" frameY="0" frameWidth="427" frameHeight="955" />
+<SubTexture name="Nervous_Electric down0000" x="440" y="1840" width="496" height="826" frameX="56" frameY="0" frameWidth="496" frameHeight="826" />
+<SubTexture name="Nervous_Electric down0001" x="936" y="1840" width="426" height="826" frameX="-14" frameY="0" frameWidth="426" frameHeight="826" />
+<SubTexture name="Nervous_Electric down0002" x="1362" y="1840" width="426" height="826" frameX="-14" frameY="0" frameWidth="426" frameHeight="826" />
+<SubTexture name="Nervous_Electric left0000" x="0" y="2760" width="412" height="926" frameX="-28" frameY="0" frameWidth="412" frameHeight="926" />
+<SubTexture name="Nervous_Electric left0001" x="412" y="2760" width="412" height="926" frameX="-28" frameY="0" frameWidth="412" frameHeight="926" />
+<SubTexture name="Nervous_Electric right0000" x="824" y="2760" width="512" height="908" frameX="72" frameY="0" frameWidth="512" frameHeight="908" />
+<SubTexture name="Nervous_Electric right0001" x="1336" y="2760" width="531" height="897" frameX="91" frameY="0" frameWidth="531" frameHeight="897" />
+<SubTexture name="Nervous_Electric up0000" x="0" y="3686" width="428" height="949" frameX="-12" frameY="0" frameWidth="428" frameHeight="949" />
+<SubTexture name="Nervous_Electric up0001" x="428" y="3686" width="427" height="955" frameX="-13" frameY="0" frameWidth="427" frameHeight="955" />
 </TextureAtlas>

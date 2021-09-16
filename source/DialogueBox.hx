@@ -28,6 +28,16 @@ class DialogueBox extends FlxSpriteGroup
 
 	public var finishThing:Void->Void;
 
+	// Cutscene backgrounds 
+	var backgroundOne:FlxSprite;
+	var backgroundTwo:FlxSprite;
+	var backgroundThr:FlxSprite;
+	var backgroundFou:FlxSprite;
+
+	// Unknown portrait
+	var unknownPortrait:FlxSprite;
+
+	// Character portraits
 	var portraitElectric:FlxSprite;
 	var portraitConfused:FlxSprite;
 	var portraitConfident:FlxSprite;
@@ -57,26 +67,16 @@ class DialogueBox extends FlxSpriteGroup
 		}, 5);
 
 		box = new FlxSprite(-20, 45);
-		
-		var hasDialog = false;
-		switch (PlayState.SONG.song.toLowerCase())
-		{
-			case 'pnc' | 'volt' | 'trybolty':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
-				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
-				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
-				box.width = 200;
-				box.height = 200;
-				box.x = -100;
-				box.y = 375;
-		}
+		box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+		box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+		box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+		box.width = 200;
+		box.height = 200;
+		box.x = -100;
+		box.y = 375;
 
 		this.dialogueList = dialogueList;
-		
-		if (!hasDialog)
-			return;
-		
+
 		portraitElectric = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/normalElectric', 'shared'));
 		portraitElectric.updateHitbox();
 		portraitElectric.scrollFactor.set();
@@ -125,17 +125,36 @@ class DialogueBox extends FlxSpriteGroup
 		add(portraitBF);
 		portraitBF.visible = false;
 
+		if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+		{
+			backgroundOne = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg1', 'electricWeek'));
+			add(backgroundOne);
+			backgroundOne.visible = false;
+
+			backgroundTwo = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg2', 'electricWeek'));
+			add(backgroundTwo);
+			backgroundTwo.visible = false;
+
+			backgroundThr = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg3', 'electricWeek'));
+			add(backgroundThr);
+			backgroundThr.visible = false;
+
+			backgroundFou = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg4', 'electricWeek'));
+			add(backgroundFou);
+			backgroundFou.visible = false;
+
+			unknownPortrait = new FlxSprite(90, 360).loadGraphic(Paths.image('portraits/unknownPortrait', 'shared'));
+			add(unknownPortrait);
+			unknownPortrait.visible = false;
+		}
+
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
 		box.updateHitbox();
 		add(box);
 
 		box.screenCenter(X);
-
-		if (!talkingRight)
-		{
-			// box.flipX = true;
-		}
+		box.flipX = true;
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
@@ -175,10 +194,10 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueStarted = true;
 		}
 
-		if (FlxG.keys.justPressed.ANY  && dialogueStarted == true)
+		if (FlxG.keys.justPressed.ANY && dialogueStarted == true)
 		{
 			remove(dialogue);
-				
+
 			FlxG.sound.play(Paths.sound('clickText'), 0.8);
 
 			if (dialogueList[1] == null && dialogueList[0] != null)
@@ -216,7 +235,7 @@ class DialogueBox extends FlxSpriteGroup
 				startDialogue();
 			}
 		}
-		
+
 		super.update(elapsed);
 	}
 
@@ -233,119 +252,247 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
 
-		switch (curCharacter)
+		if (PlayState.SONG.song.toLowerCase() != 'trybolty' || (PlayState.SONG.song.toLowerCase() == 'trybolty' && curBackground == 'default'))
 		{
-			case 'corrupt':
-				portraitAngry.visible = false;
-				portraitMad.visible = false;
-				portraitElectric.visible = false;
-				portraitBF.visible = false;
-				portraitConfident.visible = false;
-				portraitNervous.visible = false;
-				portraitConfused.visible = false;
-				box.flipX = true;
-				if (!portraitCorrupt.visible)
-				{
-					portraitCorrupt.visible = true;
-				}
-			case 'confused':
-				portraitAngry.visible = false;
-				portraitMad.visible = false;
-				portraitElectric.visible = false;
-				portraitBF.visible = false;
-				portraitConfident.visible = false;
-				portraitNervous.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = true;
-				if (!portraitConfused.visible)
-				{
-					portraitConfused.visible = true;
-				}
-			case 'confident':
-				portraitAngry.visible = false;
-				portraitMad.visible = false;
-				portraitElectric.visible = false;
-				portraitBF.visible = false;
-				portraitConfused.visible = false;
-				portraitNervous.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = true;
-				if (!portraitConfident.visible)
-				{
-					portraitConfident.visible = true;
-				}
-			case 'nervous':
-				portraitAngry.visible = false;
-				portraitMad.visible = false;
-				portraitElectric.visible = false;
-				portraitBF.visible = false;
-				portraitConfident.visible = false;
-				portraitConfused.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = true;
-				if (!portraitNervous.visible)
-				{
-					portraitNervous.visible = true;
-				}
-			case 'emp':
-				portraitAngry.visible = false;
-				portraitMad.visible = false;
-				portraitConfused.visible = false;
-				portraitBF.visible = false;
-				portraitConfident.visible = false;
-				portraitNervous.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = true;
-				if (!portraitElectric.visible)
-				{
-					portraitElectric.visible = true;
-				}
-			case 'angry':
-				portraitConfused.visible = false;
-				portraitMad.visible = false;
-				portraitElectric.visible = false;
-				portraitBF.visible = false;
-				portraitConfident.visible = false;
-				portraitNervous.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = true;
-				if (!portraitAngry.visible)
-				{
-					portraitAngry.visible = true;
-				}
-			case 'mad':
-				portraitAngry.visible = false;
-				portraitElectric.visible = false;
-				portraitConfused.visible = false;
-				portraitBF.visible = false;
-				portraitConfident.visible = false;
-				portraitNervous.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = true;
-				if (!portraitMad.visible)
-				{
-					portraitMad.visible = true;
-				}
-			case 'bf':
-				portraitAngry.visible = false;
-				portraitMad.visible = false;
-				portraitConfused.visible = false;
-				portraitElectric.visible = false;
-				portraitConfident.visible = false;
-				portraitNervous.visible = false;
-				portraitCorrupt.visible = false;
-				box.flipX = false;
-				if (!portraitBF.visible)
-				{
-					portraitBF.visible = true;
-				}
+			switch (curCharacter) // TODO: could've done just for members so it does it for me but i guess fuck me
+			{
+				case 'corrupt':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitElectric.visible = false;
+					portraitBF.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitConfused.visible = false;
+					box.flipX = true;
+					if (!portraitCorrupt.visible)
+					{
+						portraitCorrupt.visible = true;
+					}
+				case 'confused':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitElectric.visible = false;
+					portraitBF.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = true;
+					if (!portraitConfused.visible)
+					{
+						portraitConfused.visible = true;
+					}
+				case 'confident':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitElectric.visible = false;
+					portraitBF.visible = false;
+					portraitConfused.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = true;
+					if (!portraitConfident.visible)
+					{
+						portraitConfident.visible = true;
+					}
+				case 'nervous':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitElectric.visible = false;
+					portraitBF.visible = false;
+					portraitConfident.visible = false;
+					portraitConfused.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = true;
+					if (!portraitNervous.visible)
+					{
+						portraitNervous.visible = true;
+					}
+				case 'emp':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitBF.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = true;
+					if (!portraitElectric.visible)
+					{
+						portraitElectric.visible = true;
+					}
+				case 'angry':
+					portraitConfused.visible = false;
+					portraitMad.visible = false;
+					portraitElectric.visible = false;
+					portraitBF.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = true;
+					if (!portraitAngry.visible)
+					{
+						portraitAngry.visible = true;
+					}
+				case 'mad':
+					portraitAngry.visible = false;
+					portraitElectric.visible = false;
+					portraitConfused.visible = false;
+					portraitBF.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = true;
+					if (!portraitMad.visible)
+					{
+						portraitMad.visible = true;
+					}
+				case 'bf':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					box.flipX = false;
+					if (!portraitBF.visible)
+					{
+						portraitBF.visible = true;
+					}
+				case '???' | 'unknown':
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					portraitBF.visible = false;
+					if (!unknownPortrait.visible)
+					{
+						unknownPortrait.visible = true;
+					}
+			}
+		}
+		else
+		{
+			switch (curBackground)
+			{
+				case 'bg1':
+					// Backgrounds
+					backgroundFou.visible = false;
+					backgroundTwo.visible = false;
+					backgroundThr.visible = false;
+
+					// Characters
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					portraitBF.visible = false;
+					if (!backgroundOne.visible)
+					{
+						backgroundOne.visible = true;
+					}
+				case 'bg2':
+					// Backgrounds
+					backgroundOne.visible = false;
+					backgroundFou.visible = false;
+					backgroundThr.visible = false;
+
+					// Characters
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					portraitBF.visible = false;
+					if (!backgroundTwo.visible)
+					{
+						backgroundTwo.visible = true;
+					}
+				case 'bg3':
+					// Backgrounds
+					backgroundOne.visible = false;
+					backgroundTwo.visible = false;
+					backgroundFou.visible = false;
+
+					// Characters
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					portraitBF.visible = false;
+					if (!backgroundThr.visible)
+					{
+						backgroundThr.visible = true;
+					}
+				case 'bg4':
+					// Backgrounds
+					backgroundOne.visible = false;
+					backgroundTwo.visible = false;
+					backgroundThr.visible = false;
+
+					// Characters
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					portraitBF.visible = false;
+					if (!backgroundFou.visible)
+					{
+						backgroundFou.visible = true;
+					}
+				default:
+					// Backgrounds
+					backgroundOne.visible = false;
+					backgroundTwo.visible = false;
+					backgroundThr.visible = false;
+					backgroundFou.visible = false;
+
+					// Characters
+					portraitAngry.visible = false;
+					portraitMad.visible = false;
+					portraitConfused.visible = false;
+					portraitElectric.visible = false;
+					portraitConfident.visible = false;
+					portraitNervous.visible = false;
+					portraitCorrupt.visible = false;
+					portraitBF.visible = false;
+			}
 		}
 	}
 
 	function cleanDialog():Void
 	{
+		var splitChar:Array<String>;
 		var splitName:Array<String> = dialogueList[0].split(":");
-		curCharacter = splitName[1];
+		if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+		{
+			splitChar = splitName[1].split("|");
+			curCharacter = splitChar[1];
+			curBackground = splitChar[0];
+			//dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
+		}
+		else
+		{
+			curCharacter = splitName[1];
+			//dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
+		}
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
 	}
+
+	var curBackground:String = "";
 }

@@ -38,7 +38,7 @@ class HealthIcon extends FlxSprite
 		animation.add('monster', [19, 20], 0, false, isPlayer);
 		animation.add('monster-christmas', [19, 20], 0, false, isPlayer);
 		animation.add('electric', [24, 25], 0, false, isPlayer);
-		animation.add('electric-mad', [26, 27], 0, false, isPlayer);
+		animation.add('electric-nervous', [26, 27], 0, false, isPlayer);
 		animation.add('electric-god', [28, 29], 0, false, isPlayer);
 		animation.play(char);
 

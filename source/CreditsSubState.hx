@@ -39,7 +39,7 @@ class CreditsSubState extends MusicBeatSubstate
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBGMagenta'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBGBlue'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.15;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
@@ -58,7 +58,7 @@ class CreditsSubState extends MusicBeatSubstate
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 50 + (i * 50), 0, textMenuItems[i].curUser, 64, true);
+			var optionText:FlxText = new FlxText(20, 25 + (i * 50), 0, textMenuItems[i].curUser, 64, true);
 			optionText.setFormat(Paths.font("funkin.otf"), 64, FlxColor.WHITE, LEFT);
 			optionText.ID = i;
 			grpOptionsTexts.add(optionText);
@@ -79,7 +79,7 @@ class CreditsSubState extends MusicBeatSubstate
 		add(usersAvatar);
 
 		remove(usersWork);
-		usersWork = new FlxText(450, 340, 0, textMenuItems[curSelected].curWork, 64, true);
+		usersWork = new FlxText(450, 340, 0, textMenuItems[curSelected].curWork, 32, true);
 		usersWork.text = StringTools.replace(usersWork.text, "\\n", " \n\n");
 		usersWork.font = 'VCR OSD Mono';
 		add(usersWork);

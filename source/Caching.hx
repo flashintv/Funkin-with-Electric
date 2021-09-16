@@ -120,6 +120,19 @@ class Caching extends MusicBeatState
             done++;
         }
 
+        var countFromZero:Int = 0;
+        for (i in music)
+        {
+            if (countFromZero == 0)
+            {
+                FlxG.sound.cache(Paths.instRemix(i));
+                FlxG.sound.cache(Paths.voicesRemix(i));
+                trace("cached " + i + " remix");
+                done++;
+            }
+            countFromZero++;
+        }
+
         trace("Finished caching...");
 
         FlxG.switchState(new TitleState());

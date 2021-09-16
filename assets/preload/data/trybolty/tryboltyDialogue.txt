@@ -1,0 +1,8 @@
+:default|???:  *rattle* *rattle*
+:default|emp:  Wha-
+:default|???:  *rattle* *rattle*
+:bg1|spirit:  Wassuuu motherfuckers! I'mma come and make ya day worseee!
+:bg2|bf:  Bap blep ba?
+:bg3|emp:  Ay! Yo who tf are you wait wha oh shit-
+:bg4|corrupt:  Time for round 2 bitch!
+:bg5|bf:  Bap boop?

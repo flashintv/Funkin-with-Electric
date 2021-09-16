@@ -532,16 +532,17 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -10, 10);
 				addOffset("singDOWN", 0, -30);
 
+				setGraphicSize(Std.int(width * 0.7));
 				playAnim('idle');
 
-			case 'electric-mad':
-				frames = Paths.getSparrowAtlas('characters/ElectricMad', 'shared');
+			case 'electric-nervous':
+				frames = Paths.getSparrowAtlas('characters/Nervous_Electric', 'shared');
 
-				animation.addByPrefix('idle', 'ElectricMad idle', 24);
-				animation.addByPrefix('singUP', 'ElectricMad up', 24);
-				animation.addByPrefix('singRIGHT', 'ElectricMad right', 24);
-				animation.addByPrefix('singDOWN', 'ElectricMad down', 24);
-				animation.addByPrefix('singLEFT', 'ElectricMad left', 24);
+				animation.addByPrefix('idle', 'Nervous_Electric idle', 24);
+				animation.addByPrefix('singUP', 'Nervous_Electric up', 24);
+				animation.addByPrefix('singRIGHT', 'Nervous_Electric right', 24);
+				animation.addByPrefix('singDOWN', 'Nervous_Electric down', 24);
+				animation.addByPrefix('singLEFT', 'Nervous_Electric left', 24);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 50);
@@ -549,6 +550,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -10, 10);
 				addOffset("singDOWN", 0, -30);
 
+				setGraphicSize(Std.int(width * 0.7));
 				playAnim('idle');
 		}
 

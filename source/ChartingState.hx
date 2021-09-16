@@ -232,25 +232,29 @@ class ChartingState extends MusicBeatState
 		var gfversions:Array<String> = CoolUtil.coolTextFile(Paths.txt('gfVersionList'));
 		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 
-		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		var player1Text = new FlxText(10, 98, 0, "Player 1", 8);
+		var player1DropDown = new FlxUIDropDownMenu(10, 120, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player1 = characters[Std.parseInt(character)];
 		});
 		player1DropDown.selectedLabel = _song.player1;
 
-		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		var player2Text = new FlxText(140, 98, 0, "Player 2", 8);
+		var player2DropDown = new FlxUIDropDownMenu(140, 120, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player2 = characters[Std.parseInt(character)];
 		});
 		player2DropDown.selectedLabel = _song.player2;
 
-		var stagesDropDown = new FlxUIDropDownMenu(10, 125, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
+		var stageText = new FlxText(10, 167, 0, "Stage list", 8);
+		var stagesDropDown = new FlxUIDropDownMenu(10, 145, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
 		{
 			_song.stage = stages[Std.parseInt(stage)];
 		});
 		stagesDropDown.selectedLabel = _song.stage;
 
-		var gfVersionDropDown = new FlxUIDropDownMenu(140, 125, FlxUIDropDownMenu.makeStrIdLabelArray(gfversions, true), function(gfstring:String)
+		var gfVersionText = new FlxText(140, 167, 0, "GF list", 8);
+		var gfVersionDropDown = new FlxUIDropDownMenu(140, 145, FlxUIDropDownMenu.makeStrIdLabelArray(gfversions, true), function(gfstring:String)
 		{
 			_song.gfVersion = gfversions[Std.parseInt(gfstring)];
 		});
@@ -272,6 +276,10 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(gfVersionDropDown);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
+		tab_group_song.add(stageText);
+		tab_group_song.add(gfVersionText);
+		tab_group_song.add(player1Text);
+		tab_group_song.add(player2Text);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();

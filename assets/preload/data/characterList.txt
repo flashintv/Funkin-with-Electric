@@ -16,5 +16,5 @@ senpai
 senpai-angry
 spirit
 electric
-electric-mad
+electric-nervous
 electric-god

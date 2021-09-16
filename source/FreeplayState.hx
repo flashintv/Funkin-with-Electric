@@ -218,7 +218,12 @@ class FreeplayState extends MusicBeatState
 			
 			trace(songLowercase);
 
-			var poop:String = Highscore.formatSong(songHighscore, curDifficulty);
+			var poop:String;
+
+			if (songLowercase == 'outcome')
+				poop = Highscore.formatSong(songHighscore, 1);
+			else
+				poop = Highscore.formatSong(songHighscore, curDifficulty);
 
 			trace(poop);
 			
