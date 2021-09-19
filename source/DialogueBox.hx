@@ -28,7 +28,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	public var finishThing:Void->Void;
 
-	// Cutscene backgrounds 
+	// Cutscene backgrounds
 	var backgroundBlack:FlxSprite;
 	var backgroundOne:FlxSprite;
 	var backgroundTwo:FlxSprite;
@@ -37,6 +37,12 @@ class DialogueBox extends FlxSpriteGroup
 
 	// Unknown portrait
 	var unknownPortrait:FlxSprite;
+
+	// Character text portraits
+	var electricText:FlxSprite;
+	var corElectricText:FlxSprite;
+	var spiritText:FlxSprite;
+	var boyfriendText:FlxSprite;
 
 	// Character portraits
 	var portraitElectric:FlxSprite;
@@ -78,6 +84,58 @@ class DialogueBox extends FlxSpriteGroup
 		box.y = 375;
 
 		this.dialogueList = dialogueList;
+
+		if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+		{
+			backgroundBlack = new FlxSprite(0, 0).makeGraphic(1280, 768, FlxColor.BLACK);
+			add(backgroundBlack);
+			backgroundBlack.screenCenter();
+			backgroundBlack.alpha = 1;
+
+			backgroundOne = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg1', 'electricWeek'));
+			backgroundOne.setGraphicSize(1280, 768);
+			add(backgroundOne);
+			backgroundOne.screenCenter();
+			backgroundOne.alpha = 0;
+
+			backgroundTwo = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg2', 'electricWeek'));
+			backgroundTwo.setGraphicSize(1280, 768);
+			add(backgroundTwo);
+			backgroundTwo.screenCenter();
+			backgroundTwo.alpha = 0;
+
+			backgroundThr = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg3', 'electricWeek'));
+			backgroundThr.setGraphicSize(1280, 768);
+			add(backgroundThr);
+			backgroundThr.screenCenter();
+			backgroundThr.alpha = 0;
+
+			backgroundFou = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg4', 'electricWeek'));
+			backgroundFou.setGraphicSize(1280, 768);
+			add(backgroundFou);
+			backgroundFou.screenCenter();
+			backgroundFou.alpha = 0;
+
+			unknownPortrait = new FlxSprite(170, 270).loadGraphic(Paths.image('portraits/unknownPortrait', 'shared'));
+			add(unknownPortrait);
+			unknownPortrait.alpha = 0;
+
+			boyfriendText = new FlxSprite(170, 155).loadGraphic(Paths.image('portraits/boyfriendText', 'shared'));
+			add(boyfriendText);
+			boyfriendText.alpha = 0;
+
+			spiritText = new FlxSprite(170, 155).loadGraphic(Paths.image('portraits/spiritText', 'shared'));
+			add(spiritText);
+			spiritText.alpha = 0;
+
+			electricText = new FlxSprite(170, 155).loadGraphic(Paths.image('portraits/electricText', 'shared'));
+			add(electricText);
+			electricText.alpha = 0;
+
+			corElectricText = new FlxSprite(170, 190).loadGraphic(Paths.image('portraits/corruptElectricText', 'shared'));
+			add(corElectricText);
+			corElectricText.alpha = 0;
+		}
 
 		portraitElectric = new FlxSprite(-20, 80).loadGraphic(Paths.image('portraits/normalElectric', 'shared'));
 		portraitElectric.updateHitbox();
@@ -126,42 +184,6 @@ class DialogueBox extends FlxSpriteGroup
 		portraitBF.scrollFactor.set();
 		add(portraitBF);
 		portraitBF.alpha = 0;
-
-		if (PlayState.SONG.song.toLowerCase() == 'trybolty')
-		{
-			backgroundBlack = new FlxSprite(0, 0).makeGraphic(1280, 768, FlxColor.BLACK);
-			add(backgroundBlack);
-			backgroundBlack.screenCenter();
-			backgroundBlack.alpha = 0;
-
-			backgroundOne = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg1', 'electricWeek'));
-			backgroundOne.setGraphicSize(1280, 768);
-			add(backgroundOne);
-			backgroundOne.screenCenter();
-			backgroundOne.alpha = 0;
-
-			backgroundTwo = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg2', 'electricWeek'));
-			backgroundTwo.setGraphicSize(1280, 768);
-			add(backgroundTwo);
-			backgroundTwo.screenCenter();
-			backgroundTwo.alpha = 0;
-
-			backgroundThr = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg3', 'electricWeek'));
-			backgroundThr.setGraphicSize(1280, 768);
-			add(backgroundThr);
-			backgroundThr.screenCenter();
-			backgroundThr.alpha = 0;
-
-			backgroundFou = new FlxSprite(0, 0).loadGraphic(Paths.image('CutsceneBGs/bg4', 'electricWeek'));
-			backgroundFou.setGraphicSize(1280, 768);
-			add(backgroundFou);
-			backgroundFou.screenCenter();
-			backgroundFou.alpha = 0;
-
-			unknownPortrait = new FlxSprite(110, 330).loadGraphic(Paths.image('portraits/unknownPortrait', 'shared'));
-			add(unknownPortrait);
-			unknownPortrait.alpha = 0;
-		}
 
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
@@ -233,12 +255,19 @@ class DialogueBox extends FlxSpriteGroup
 						portraitAngry.alpha -= 1 / 5;
 						portraitMad.alpha -= 1 / 5;
 						portraitBF.alpha -= 1 / 5;
-						unknownPortrait.alpha -= 1 / 5;
-						backgroundBlack.alpha -= 1 / 5;
-						backgroundOne.alpha -= 1 / 5;
-						backgroundTwo.alpha -= 1 / 5;
-						backgroundThr.alpha -= 1 / 5;
-						backgroundFou.alpha -= 1 / 5;
+						if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						{
+							unknownPortrait.alpha -= 1 / 5;
+							backgroundBlack.alpha -= 1 / 5;
+							backgroundOne.alpha -= 1 / 5;
+							backgroundTwo.alpha -= 1 / 5;
+							backgroundThr.alpha -= 1 / 5;
+							backgroundFou.alpha -= 1 / 5;
+							boyfriendText.alpha -= 1 / 5;
+							spiritText.alpha -= 1 / 5;
+							electricText.alpha -= 1 / 5;
+							corElectricText.alpha -= 1 / 5;
+						}
 						swagDialogue.alpha -= 1 / 5;
 						dropText.alpha = swagDialogue.alpha;
 					}, 5);
@@ -273,7 +302,8 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
 
-		if (PlayState.SONG.song.toLowerCase() != 'trybolty' || (PlayState.SONG.song.toLowerCase() == 'trybolty' && curBackground == 'default'))
+		if (PlayState.SONG.song.toLowerCase() != 'trybolty'
+			|| (PlayState.SONG.song.toLowerCase() == 'trybolty' && curBackground == 'default'))
 		{
 			switch (curCharacter) // TODO: could've done just for members so it does it for me but i guess fuck me
 			{
@@ -285,7 +315,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitConfused.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitCorrupt.alpha == 0)
 					{
@@ -299,7 +330,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitConfused.alpha == 0)
 					{
@@ -313,7 +345,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfused.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitConfident.alpha == 0)
 					{
@@ -327,7 +360,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitConfused.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitNervous.alpha == 0)
 					{
@@ -341,7 +375,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitElectric.alpha == 0)
 					{
@@ -355,7 +390,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitAngry.alpha == 0)
 					{
@@ -369,7 +405,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = true;
 					if (portraitMad.alpha == 0)
 					{
@@ -383,7 +420,8 @@ class DialogueBox extends FlxSpriteGroup
 					portraitConfident.alpha = 0;
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
-					unknownPortrait.alpha = 0;
+					if (PlayState.SONG.song.toLowerCase() == 'trybolty')
+						unknownPortrait.alpha = 0;
 					box.flipX = false;
 					if (portraitBF.alpha == 0)
 					{
@@ -398,7 +436,6 @@ class DialogueBox extends FlxSpriteGroup
 					portraitNervous.alpha = 0;
 					portraitCorrupt.alpha = 0;
 					portraitBF.alpha = 0;
-					unknownPortrait.alpha = 0;
 					if (unknownPortrait.alpha == 0)
 					{
 						unknownPortrait.alpha = 1;
@@ -407,10 +444,46 @@ class DialogueBox extends FlxSpriteGroup
 		}
 		else
 		{
+			switch (curCharacter)
+			{
+				case 'emp':
+					boyfriendText.alpha = 0;
+					spiritText.alpha = 0;
+					corElectricText.alpha = 0;
+					if (electricText.alpha == 0)
+					{
+						electricText.alpha = 1;
+					}
+				case 'corrupt':
+					boyfriendText.alpha = 0;
+					spiritText.alpha = 0;
+					electricText.alpha = 0;
+					if (corElectricText.alpha == 0)
+					{
+						corElectricText.alpha = 1;
+					}
+				case 'spirit':
+					boyfriendText.alpha = 0;
+					corElectricText.alpha = 0;
+					electricText.alpha = 0;
+					if (spiritText.alpha == 0)
+					{
+						spiritText.alpha = 1;
+					}
+				case 'bf':
+					corElectricText.alpha = 0;
+					spiritText.alpha = 0;
+					electricText.alpha = 0;
+					if (boyfriendText.alpha == 0)
+					{
+						boyfriendText.alpha = 1;
+					}
+			}
+
 			switch (curBackground)
 			{
 				case 'bg1':
-					box.animation.play('leBronJames', true);
+					playBoxAnim('leBronJames');
 					// Backgrounds
 					backgroundFou.alpha = 0;
 					backgroundTwo.alpha = 0;
@@ -432,7 +505,7 @@ class DialogueBox extends FlxSpriteGroup
 						backgroundOne.alpha = 1;
 					}
 				case 'bg2':
-					box.animation.play('leBronJames', true);
+					playBoxAnim('leBronJames');
 					// Backgrounds
 					backgroundOne.alpha = 0;
 					backgroundFou.alpha = 0;
@@ -454,7 +527,7 @@ class DialogueBox extends FlxSpriteGroup
 						backgroundTwo.alpha = 1;
 					}
 				case 'bg3':
-					box.animation.play('leBronJames', true);
+					playBoxAnim('leBronJames');
 					// Backgrounds
 					backgroundOne.alpha = 0;
 					backgroundTwo.alpha = 0;
@@ -476,7 +549,7 @@ class DialogueBox extends FlxSpriteGroup
 						backgroundThr.alpha = 1;
 					}
 				case 'bg4':
-					box.animation.play('leBronJames', true);
+					playBoxAnim('leBronJames');
 					// Backgrounds
 					backgroundOne.alpha = 0;
 					backgroundTwo.alpha = 0;
@@ -498,7 +571,7 @@ class DialogueBox extends FlxSpriteGroup
 						backgroundFou.alpha = 1;
 					}
 				case 'default':
-					box.animation.play('leBronJames', true);
+					playBoxAnim('normal');
 					backgroundOne.alpha = 0;
 					backgroundTwo.alpha = 0;
 					backgroundThr.alpha = 0;
@@ -514,18 +587,45 @@ class DialogueBox extends FlxSpriteGroup
 					portraitCorrupt.alpha = 0;
 					portraitBF.alpha = 0;
 					unknownPortrait.alpha = 0;
-					if (backgroundBlack.alpha == 0)
-					{
-						backgroundBlack.alpha = 1;
-					}
+
+					// Black background
+					backgroundBlack.alpha = 1;
 				default:
-					box.animation.play('normal', true);
+					playBoxAnim('normal');
 					backgroundOne.alpha = 0;
 					backgroundTwo.alpha = 0;
 					backgroundThr.alpha = 0;
 					backgroundFou.alpha = 0;
 					backgroundBlack.alpha = 0;
 			}
+		}
+	}
+
+	function playBoxAnim(boxAnim:String)
+	{
+		if (boxAnim == 'leBronJames')
+		{
+			box.animation.play('leBronJames', true);
+			box.x = 150;
+			box.y = 10;
+
+			dropText.x = 242;
+			dropText.y = 77;
+
+			swagDialogue.x = 240;
+			swagDialogue.y = 75;
+		}
+		else
+		{
+			box.animation.play('normal', true);
+			box.x = -100;
+			box.y = 375;
+
+			dropText.x = 242;
+			dropText.y = 502;
+
+			swagDialogue.x = 240;
+			swagDialogue.y = 500;
 		}
 	}
 

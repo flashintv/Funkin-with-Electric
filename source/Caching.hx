@@ -39,12 +39,13 @@ class Caching extends MusicBeatState
         text.alignment = FlxTextAlign.CENTER;
         text.alpha = 0;
 
-        kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('KadeEngineLogo'));
+        kadeLogo.frames = Paths.getSparrowAtlas('logoBumpin');
+		kadeLogo.animation.addByPrefix('bump', 'logo bumpin', 24);
+		kadeLogo.animation.play('bump');
         kadeLogo.x -= kadeLogo.width / 2;
         kadeLogo.y -= kadeLogo.height / 2 + 100;
         text.y -= kadeLogo.height / 2 - 125;
         text.x -= 170;
-        kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.6));
 
         kadeLogo.alpha = 0;
 
@@ -65,7 +66,6 @@ class Caching extends MusicBeatState
 
     override function update(elapsed) 
     {
-
         if (toBeDone != 0 && done != toBeDone)
         {
             var alpha = HelperFunctions.truncateFloat(done / toBeDone * 100,2) / 100;
@@ -77,10 +77,8 @@ class Caching extends MusicBeatState
         super.update(elapsed);
     }
 
-
     function cache()
     {
-
         var images = [];
         var music = [];
 
@@ -123,7 +121,7 @@ class Caching extends MusicBeatState
         var countFromZero:Int = 0;
         for (i in music)
         {
-            if (countFromZero == 0)
+            if (countFromZero == 0 || countFromZero == 1)
             {
                 FlxG.sound.cache(Paths.instRemix(i));
                 FlxG.sound.cache(Paths.voicesRemix(i));

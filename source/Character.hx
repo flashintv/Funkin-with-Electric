@@ -545,10 +545,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'Nervous_Electric left', 24);
 
 				addOffset('idle');
-				addOffset("singUP", -6, 50);
-				addOffset("singRIGHT", 0, 27);
-				addOffset("singLEFT", -10, 10);
-				addOffset("singDOWN", 0, -30);
+				addOffset("singUP", -9, 19);
+				addOffset("singRIGHT", -116, -14);
+				addOffset("singLEFT", 66, 1);
+				addOffset("singDOWN", -23, -68);
 
 				setGraphicSize(Std.int(width * 0.7));
 				playAnim('idle');

@@ -278,27 +278,17 @@ class PlayState extends MusicBeatState
 				storyDifficultyText = "Remix";
 		}
 
-		presenceSongName = SONG.song; 
+		presenceSongName = SONG.song.toLowerCase(); 
 		switch (presenceSongName)
 		{
 			case 'pnc':
 				presenceSongName = 'Plugs N Connections';
 			case 'volt':
 				presenceSongName = 'V.O.L.T';
-
-		}
-
-		iconRPC = SONG.player2;
-
-		// To avoid having duplicate images in Discord assets
-		switch (iconRPC)
-		{
-			case 'senpai-angry':
-				iconRPC = 'senpai';
-			case 'monster-christmas':
-				iconRPC = 'monster';
-			case 'mom-car':
-				iconRPC = 'mom';
+			case 'trybolty':
+				presenceSongName = 'TryBolty';
+			case 'outcome':
+				presenceSongName = 'Outcome';
 		}
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
@@ -327,7 +317,7 @@ class PlayState extends MusicBeatState
 			+ "% | Score: "
 			+ songScore
 			+ " | Misses: "
-			+ misses, iconRPC);
+			+ misses);
 		#end
 
 		// var gameCam:FlxCamera = FlxG.camera;
@@ -361,6 +351,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('volt/voltDialogue'));
 			case 'trybolty':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('trybolty/tryboltyDialogue'));
+			case 'outcome':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('outcome/outcomeDialogue'));
 		}
 
 		switch (SONG.stage)
@@ -494,7 +486,6 @@ class PlayState extends MusicBeatState
 				dad.y -= 50;
 			case 'electric-god':
 				dad.x -= 250;
-				//FlxTween.circularMotion(dad, dad.x, dad.y, 50, 20, true, 30, false, { ease: FlxEase.quadInOut });
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -619,7 +610,7 @@ class PlayState extends MusicBeatState
 		// Add Kade Engine watermark
 		kadeEngineWatermark = new FlxText(4, healthBarBG.y
 			+ 50, 0,
-			SONG.song
+			presenceSongName
 			+ " "
 			+ (storyDifficulty == 3 ? "Remix" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy"),
 			16);
@@ -700,7 +691,8 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'trybolty':
 					schoolIntro(doof);
-
+				case 'outcome':
+					schoolIntro(doof);
 				default:
 					startCountdown();
 			}
@@ -932,7 +924,7 @@ class PlayState extends MusicBeatState
 			songPosBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
 			add(songPosBar);
 
-			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20, songPosBG.y, 0, SONG.song, 16);
+			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20, songPosBG.y, 0, presenceSongName, 16);
 			if (FlxG.save.data.downscroll)
 				songName.y -= 3;
 			songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -943,6 +935,9 @@ class PlayState extends MusicBeatState
 			songPosBar.cameras = [camHUD];
 			songName.cameras = [camHUD];
 		}
+
+		if (curStage == 'park-sky')
+			FlxTween.circularMotion(dad, dad.x, dad.y, 20, 20, true, 30, false, { ease: FlxEase.quadInOut });
 
 		// Song check real quick
 		switch (curSong)
@@ -967,7 +962,7 @@ class PlayState extends MusicBeatState
 			+ "% | Score: "
 			+ songScore
 			+ " | Misses: "
-			+ misses, iconRPC);
+			+ misses);
 		#end
 	}
 
@@ -1263,7 +1258,7 @@ class PlayState extends MusicBeatState
 				+ "% | Score: "
 				+ songScore
 				+ " | Misses: "
-				+ misses, iconRPC);
+				+ misses);
 			#end
 			if (!startTimer.finished)
 				startTimer.active = false;
@@ -1300,13 +1295,13 @@ class PlayState extends MusicBeatState
 					+ "% | Score: "
 					+ songScore
 					+ " | Misses: "
-					+ misses, iconRPC, true,
+					+ misses, "", true,
 					songLength
 					- Conductor.songPosition);
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, presenceSongName + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), iconRPC);
+				DiscordClient.changePresence(detailsText, presenceSongName + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy));
 			}
 			#end
 		}
@@ -1336,7 +1331,7 @@ class PlayState extends MusicBeatState
 			+ "% | Score: "
 			+ songScore
 			+ " | Misses: "
-			+ misses, iconRPC);
+			+ misses);
 		#end
 	}
 
@@ -1663,7 +1658,7 @@ class PlayState extends MusicBeatState
 				+ "% | Score: "
 				+ songScore
 				+ " | Misses: "
-				+ misses, iconRPC);
+				+ misses);
 			#end
 
 			// FlxG.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -1696,7 +1691,7 @@ class PlayState extends MusicBeatState
 					+ "% | Score: "
 					+ songScore
 					+ " | Misses: "
-					+ misses, iconRPC);
+					+ misses);
 				#end
 
 				// FlxG.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -2009,7 +2004,7 @@ class PlayState extends MusicBeatState
 					transIn = FlxTransitionableState.defaultTransIn;
 					transOut = FlxTransitionableState.defaultTransOut;
 
-					// FlxG.switchState(new EndingState()); /* Left over from the scrapped demo */
+					// FlxG.switchState(new EndingState()); /* Left over from the scrapped demo. You won't recover any files. Since they don't exist anymore. */
 					FlxG.switchState(new MainMenuState());
 
 					#if windows
@@ -2850,7 +2845,7 @@ class PlayState extends MusicBeatState
 			+ "% | Score: "
 			+ songScore
 			+ " | Misses: "
-			+ misses, iconRPC, true,
+			+ misses, "", true,
 			songLength
 			- Conductor.songPosition);
 		#end

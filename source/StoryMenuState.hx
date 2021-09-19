@@ -224,11 +224,6 @@ class StoryMenuState extends MusicBeatState
 					changeWeek(1);
 				}
 
-				#if debug
-				if (FlxG.keys.pressed.H)
-					FlxG.switchState(new EndingState());
-				#end
-
 				if (controls.RIGHT)
 					rightArrow.animation.play('press')
 				else
